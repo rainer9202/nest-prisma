@@ -1,0 +1,12 @@
+model covers {
+    id Int @id @default(autoincrement())
+
+    registerDate     DateTime @db.Date
+    historicalNumber String?
+    totalAmount      Float
+    iteration        Int
+    invoiced         Boolean
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+}
