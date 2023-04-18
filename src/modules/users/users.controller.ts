@@ -19,8 +19,6 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { usersTransform } from './transform/user.transform';
 
 @Controller('users')
-@ApiBearerAuth()
-@UseGuards(AuthGuard)
 @ApiTags('users')
 export class UsersController {
   private readonly model = 'user';
@@ -35,6 +33,8 @@ export class UsersController {
     };
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Get()
   async findAll() {
     return {
@@ -44,6 +44,8 @@ export class UsersController {
     };
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return {
@@ -53,6 +55,8 @@ export class UsersController {
     };
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return {
@@ -62,6 +66,8 @@ export class UsersController {
     };
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Delete(':id')
   async remove(@Param('id') id: string) {
     await this.usersService.remove(+id);

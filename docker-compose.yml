@@ -1,7 +1,7 @@
 version: "1.0"
 services:
   api:
-    container_name: "nestjs-prisma"
+    container_name: "nestjs_prisma"
     restart: always
     image: node:18-alpine
     env_file:
@@ -15,6 +15,7 @@ services:
       - .:/usr/src/app
     tty: true
   sqlserver:
+    container_name: "sql_server_container"
     image: mcr.microsoft.com/mssql/server
     ports:
       - 1433:1433
@@ -22,6 +23,6 @@ services:
       ACCEPT_EULA: Y
       SA_PASSWORD: PasswordO1.
     volumes:
-      - nestjs-prisma:/var/opt/mssql
+      - sql_server_container:/var/opt/mssql
 volumes:
-  nestjs-prisma:
+  sql_server_container:
