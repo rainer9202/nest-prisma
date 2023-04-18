@@ -12,7 +12,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { SignInDto } from './dto/sign-in.dto';
 
-import { AuthGuard } from '../../common/guard/auth.guard';
+import { AuthGuard } from 'src/common/guard';
 import { AuthService } from './auth.service';
 
 @Controller('auth')

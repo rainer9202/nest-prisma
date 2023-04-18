@@ -1,4 +1,4 @@
-import { PrismaServiceProvider } from 'src/providers';
+import { PrismaServiceProvider } from 'src/providers/database';
 
 import { BaseRepository } from '../abstract/BaseRepository';
 

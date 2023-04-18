@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-import { AuthGuard } from 'src/common';
+import { AuthGuard } from 'src/common/guard';
 
 import { CoversService } from './covers.service';
 import { coversTransform } from './transform/cover.transform';

@@ -1,7 +1,7 @@
 import { INestApplication, Injectable, OnModuleInit } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 
-import { DB_ENV } from 'src/config';
+import { CONNECTION_STRING } from 'src/config/constants';
 
 @Injectable()
 export class PrismaServiceProvider
@@ -12,7 +12,7 @@ export class PrismaServiceProvider
     super({
       datasources: {
         db: {
-          url: DB_ENV.url,
+          url: CONNECTION_STRING,
         },
       },
     });

@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { MessageRepository } from 'src/common';
+import { ITEM_NOT_EXIST } from 'src/common/messages';
 
 import { CreateCoverDto } from './dto/create-cover.dto';
 import { UpdateCoverDto } from './dto/update-cover.dto';
@@ -13,7 +13,7 @@ export class CoversService {
 
   async findOne(id: number) {
     const cover = await this.repository.findOne('id', id);
-    if (!cover) throw new NotFoundException(MessageRepository.NOT_EXIST);
+    if (!cover) throw new NotFoundException(ITEM_NOT_EXIST);
     return cover;
   }
 
@@ -58,7 +58,7 @@ export class CoversService {
     const { registerDate, historicalNumber, totalAmount, iteration, invoiced } =
       dto;
     const cover = await this.repository.findOne('id', id);
-    if (!cover) throw new NotFoundException(MessageRepository.NOT_EXIST);
+    if (!cover) throw new NotFoundException(ITEM_NOT_EXIST);
     return await this.repository.update(id, {
       registerDate,
       historicalNumber,
@@ -70,7 +70,7 @@ export class CoversService {
 
   async remove(id: number) {
     const cover = await this.repository.findOne('id', id);
-    if (!cover) throw new NotFoundException(MessageRepository.NOT_EXIST);
+    if (!cover) throw new NotFoundException(ITEM_NOT_EXIST);
     return await this.repository.remove(id);
   }
 }

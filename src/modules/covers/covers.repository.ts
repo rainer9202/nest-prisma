@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaBaseRepository } from 'src/bases/';
+import { PrismaBaseRepository } from 'src/bases/repositories';
+
 import { CoverEntity } from './entities/Cover';
 
 @Injectable()

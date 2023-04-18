@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { MatchHash } from 'src/common';
+import { MatchHash } from 'src/common/crypt';
 
 import { UsersService } from '../users/users.service';
 import { SignInDto } from './dto/sign-in.dto';

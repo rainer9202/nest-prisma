@@ -4,7 +4,8 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 
-import { HashValue, MessageRepository } from 'src/common';
+import { HashValue } from 'src/common/crypt';
+import { ITEM_EXIST, ITEM_NOT_EXIST } from 'src/common/messages';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -16,13 +17,13 @@ export class UsersService {
 
   async findOne(id: number) {
     const user = await this.repository.findOne('id', id);
-    if (!user) throw new NotFoundException(MessageRepository.NOT_EXIST);
+    if (!user) throw new NotFoundException(ITEM_NOT_EXIST);
     return user;
   }
 
   async findOneByEmail(email: string) {
     const user = await this.repository.findOne('email', email);
-    if (!user) throw new NotFoundException(MessageRepository.NOT_EXIST);
+    if (!user) throw new NotFoundException(ITEM_NOT_EXIST);
     return user;
   }
 
@@ -33,7 +34,7 @@ export class UsersService {
   async create(dto: CreateUserDto) {
     const { name, email } = dto;
     const user = await this.repository.findOne('email', email);
-    if (user) throw new BadRequestException(MessageRepository.EXIST);
+    if (user) throw new BadRequestException(ITEM_EXIST);
     return await this.repository.create({
       name,
       email,
@@ -45,17 +46,17 @@ export class UsersService {
     const { name, email } = dto;
     const userByEmail = await this.repository.findOne('email', dto.email);
     if (userByEmail && userByEmail.id !== id)
-      throw new BadRequestException(MessageRepository.EXIST);
+      throw new BadRequestException(ITEM_EXIST);
 
     const user = await this.repository.findOne('id', id);
-    if (!user) throw new BadRequestException(MessageRepository.NOT_EXIST);
+    if (!user) throw new BadRequestException(ITEM_NOT_EXIST);
 
     return await this.repository.update(id, { name, email });
   }
 
   async remove(id: number) {
     const user = await this.repository.findOne('id', id);
-    if (!user) throw new NotFoundException(MessageRepository.NOT_EXIST);
+    if (!user) throw new NotFoundException(ITEM_NOT_EXIST);
     return await this.repository.remove(id);
   }
 }

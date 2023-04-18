@@ -2,12 +2,12 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 
 import { AppModule } from './app.module';
-import { SwaggerConfig } from './config';
-import { SERVER_ENV } from './config';
+import { SwaggerConfig } from './config/openapi';
+import { APP_PREFIX, APP_PORT } from './config/constants';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix(SERVER_ENV.prefix);
+  app.setGlobalPrefix(APP_PREFIX);
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -19,6 +19,6 @@ async function bootstrap() {
   const document = swagger.createDocument(app);
   swagger.setup(document, app);
 
-  await app.listen(SERVER_ENV.port);
+  await app.listen(APP_PORT);
 }
 bootstrap();
